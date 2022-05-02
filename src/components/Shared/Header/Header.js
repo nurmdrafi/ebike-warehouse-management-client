@@ -11,8 +11,9 @@ const Header = () => {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ms-auto">
         <CustomLink to="/">Home</CustomLink>
-        <CustomLink to="/inventory">Inventory</CustomLink>
-        <CustomLink to="/myitems">My Items</CustomLink>
+        <CustomLink to="/manage-inventory">Manage Inventory</CustomLink>
+        <CustomLink to="/add-items">Add Items</CustomLink>
+        <CustomLink to="/my-items">My Items</CustomLink>
         <CustomLink to="/blogs">Blogs</CustomLink>
         <CustomLink to="/login">Log In</CustomLink>
         <CustomLink to="/register">Register</CustomLink>

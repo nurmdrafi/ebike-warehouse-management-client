@@ -11,6 +11,7 @@ import ManageInventories from './components/Inventory/ManageInventories/ManageIn
 import MyItems from './components/Inventory/MyItems/MyItems';
 import LogIn from './components/Auth/LogIn/LogIn';
 import Register from './components/Auth/Register/Register';
+import AddItems from './components/Inventory/AddItems/AddItems';
 function App() {
   return (
     <div>
@@ -20,8 +21,9 @@ function App() {
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/inventory" element={<Inventory></Inventory>}></Route>
         {/* <Route path="/inventory/:id" element={}></Route> */}
-        <Route path="/inventory" element={<ManageInventories></ManageInventories>}></Route>
-        <Route path="/myitems" element={<MyItems></MyItems>}></Route>
+        <Route path="/manage-inventory" element={<ManageInventories></ManageInventories>}></Route>
+        <Route path="/add-items" element={<AddItems></AddItems>}></Route>
+        <Route path="/my-items" element={<MyItems></MyItems>}></Route>
         <Route path="/blogs" element={<Blogs></Blogs>}></Route>
         <Route path="/login" element={<LogIn></LogIn>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
