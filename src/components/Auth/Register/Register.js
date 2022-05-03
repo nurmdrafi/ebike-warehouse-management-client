@@ -30,9 +30,15 @@ const Register = () => {
       </button>
       {/* Divider */}
       <div className="d-flex align-items-center my-4">
-        <div style={{ height: "1px" }} className="bg-secondary w-50 opacity-50"></div>
+        <div
+          style={{ height: "1px" }}
+          className="bg-secondary w-50 opacity-50"
+        ></div>
         <p className="mt-2 px-2 opacity-75">OR</p>
-        <div style={{ height: "1px" }} className="bg-secondary w-50 opacity-50"></div>
+        <div
+          style={{ height: "1px" }}
+          className="bg-secondary w-50 opacity-50"
+        ></div>
       </div>
       {/* Form start */}
       <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
@@ -41,33 +47,45 @@ const Register = () => {
           <input
             type="text"
             {...register("username", { required: true })}
-            style={{ outlineColor: errors.username ? "red" : "black" }}
             placeholder="e.g. John Doe"
+            className={`form-control ${errors.username ? "is-invalid" : ""}`}
           />
           <p className="text-danger">
             {errors.username && "Username is required"}
           </p>
         </div>
+
         <div className="field">
           <label>Work Email</label>
           <input
             type="text"
             {...register("email", { required: true })}
-            style={{ outlineColor: errors.email ? "red" : "black" }}
             placeholder="work@example.com"
+            className={`form-control ${errors.email ? "is-invalid" : ""}`}
           />
           <p className="text-danger">{errors.email && "Email is required"}</p>
         </div>
+
         <div className="field">
           <label>Create Password</label>
           <input
-            type="text"
+            type="password"
             {...register("password", { required: true })}
-            style={{ outlineColor: errors.password ? "red" : "black" }}
             placeholder="Create a password with 8 characters"
+            className={`form-control ${errors.password ? "is-invalid" : ""}`}
           />
           <p className="text-danger">
             {errors.password && "Password is required"}
+          </p>
+        </div>
+        <div className="field">
+          <label>Confirm Password</label>
+          <input type="password" {...register("confirmPassword", {required: true})}
+          placeholder="Please confirm your password"
+          className={`form-control ${errors.confirmPassword ? "is-invalid" : ""}`}
+          />
+          <p className="text-danger">
+            {errors.confirmPassword && "Confirm Password is required"}
           </p>
         </div>
         <input type="submit" value="Register" />

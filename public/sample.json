@@ -1,0 +1,65 @@
+[
+  {
+    "name": "AVENTON - PACE 500 NEXT-GEN Ebike",
+    "brand": "AVENTON",
+    "image": "https://i.ibb.co/n7YCLLT/aventon-pace-500-step-thru-e-bike-28168644624486.jpg",
+    "description": "The Aventon Pace 500 E-Bike will have you climbing hills with ease and cruising along without breaking a sweat on comfortable fat tires.",
+    "price": "1,699.00",
+    "quantity": "50",
+    "supplier-name": "Power Bike"
+  },
+  {
+    "name": "AVENTON - AVENTURE Ebike",
+    "brand": "AVENTON",
+    "image": "https://i.ibb.co/p4KhDT2/Aventure-So-Cal-Sand-1.webp",
+    "description": "A beautiful yet powerful Electric Bike created by Aventon. This ebike has front suspension, 4 inch fat tires, and a 750 watt electric motor.",
+    "price": "1,899.00",
+    "quantity": "30",
+    "supplier-name": "Power Bike"
+  },
+  {
+    "name": "AVENTON - SINCH STEP-THROUGH Foldable Ebike",
+    "brand": "AVENTON",
+    "image": "https://i.ibb.co/ZLXK2pT/sinch-st-green-side.webp",
+    "description": "The Sinch Step-Through is a refined version of Aventon's Sinch foldable Class 2 e-bike. This frame is easier to mount and dismount, for less agile riders.",
+    "price": "1,799.00",
+    "quantity": "20",
+    "supplier-name": "Power Bike"
+  },
+  {
+    "name": "AVENTON - SINCH Foldable Ebike",
+    "brand": "AVENTON",
+    "image": "https://i.ibb.co/n84wrNh/2020-Aventon-Sinch-Crest-White-Studio-Photos-001-6a86652b-0010-4727-b357-095b116f922a.webp",
+    "description": "We didn't call this ebike the Sinch for no reason. Foldable, portable, storable, powerful, comfortable, and ready for anything, the Sinch folding electric bike lives up to the definition of \"doing it with ease\". ",
+    "price": "1,699.00",
+    "quantity": "10",
+    "supplier-name": "Power Bike"
+  },
+  {
+    "name": "AVENTON - PACE 350 NEXT-GEN Ebike",
+    "brand": "AVENTON",
+    "image": "https://i.ibb.co/RH7LgRS/grey-350-side-aae7768c-8c79-48d6-99d9-802d5c10ad9b.webp",
+    "description": "The Pace 350 Step-through ebike goes on throttle and pedal assist. This electric bike includes a 350W hub-drive motor and large comfortable tires.",
+    "price": "1,399.00",
+    "quantity": "60",
+    "supplier-name": "Power Bike"
+  },
+  {
+    "name": "Batch - The EBike Electric Hybrid Bike",
+    "brand": "Batch",
+    "image": "https://i.ibb.co/fHhLCVW/batch-the-e-bike-electric-hybrid-bike-28324459511910-823x.webp",
+    "description": "Commuting by bike is becoming more popular and much easier to do with the rise of Ebikes. With an E-bike, you can cover longer distances and carry all your gear without getting exhausted before work.",
+    "price": "2,099.99",
+    "quantity": "7",
+    "supplier-name": "Power Bike"
+  },
+  {
+    "name": "SWFT - ZIP Ebike",
+    "brand": "SWFT",
+    "image": "https://i.ibb.co/h1pLKhb/Rev-Bikes-Swift-Fill-Wzkw-MCw2-MDBd.jpg",
+    "description": "The ZIP's throttle reaches speeds up to 19.8mph. Max distance. Ride up to 37 miles on a single battery charge.",
+    "price": "3,000.00",
+    "quantity": "12",
+    "supplier-name": "Power Bike"
+  }
+]

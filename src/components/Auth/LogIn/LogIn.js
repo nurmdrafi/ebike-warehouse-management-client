@@ -22,25 +22,43 @@ const LogIn = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column">
         <div className="field">
           <label>Email</label>
-          <input type="email" {...register("email", { required: true })} />
+          <input type="email" {...register("email", { required: true })}
+          placeholder="Enter your email"
+          className={`form-control ${errors.email ? "is-invalid" : ""}`}
+          />
+          <p className="text-danger">
+            {errors.email && "Email is required"}
+          </p>
         </div>
+
         <div className="field">
           <label>Password</label>
           <input
             type="password"
             {...register("password", { required: true })}
+            placeholder="Enter your password"
+            className={`form-control ${errors.password ? "is-invalid" : ""}`}
           />
+          <p className="text-danger">
+            {errors.password && "Password is required"}
+          </p>
         </div>
         <Link className="text-end" to="/">
           Forget Password?
         </Link>
         <input type="submit" value="Continue" />
       </form>
-     {/* Divider */}
+      {/* Divider */}
       <div className="d-flex align-items-center my-4">
-        <div style={{ height: "1px" }} className="bg-secondary w-50 opacity-50"></div>
+        <div
+          style={{ height: "1px" }}
+          className="bg-secondary w-50 opacity-50"
+        ></div>
         <p className="mt-2 px-2 opacity-75">OR</p>
-        <div style={{ height: "1px" }} className="bg-secondary w-50 opacity-50"></div>
+        <div
+          style={{ height: "1px" }}
+          className="bg-secondary w-50 opacity-50"
+        ></div>
       </div>
       {/* Sign in with google button*/}
       <button className="google-btn">

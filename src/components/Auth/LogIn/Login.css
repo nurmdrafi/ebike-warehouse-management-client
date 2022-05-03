@@ -14,7 +14,7 @@
 .form-container input[type=submit]{
 margin-top: 15px;
 }
-.form-container .field{
+form .field{
     display: flex;
     flex-direction: column;
 }
