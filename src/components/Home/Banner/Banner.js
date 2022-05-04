@@ -1,11 +1,11 @@
 import React from "react";
 import BannerImg from "../../../images/banner.jpg";
 import "./Banner.css";
+
 const Banner = () => {
   return (
-    <div className="banner-container">
-      <img src={BannerImg} alt="" />
-      <div className="position-absolute w-100 z-index-1 bottom-0">
+    <div className="banner-container" style={{background: `url(${BannerImg})`, backgroundPosition: 'center', backgroundRepeat: 'no-repeat'}}>
+      
       <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shapeRendering="auto">
         <defs>
           <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
@@ -19,7 +19,6 @@ const Banner = () => {
           <use xlinkHref="#gentle-wave" x="48" y="16" fill="rgba(251,251,251,0.95"></use>
         </g>
       </svg>
-      </div>
     </div>
   );
 };
