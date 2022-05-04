@@ -5,8 +5,6 @@ import './Home.css'
 
 const Home = () => {
   const [items] = useInventory();
-
-
   return (
     <div>
       <Banner></Banner>

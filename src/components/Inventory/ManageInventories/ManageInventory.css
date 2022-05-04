@@ -10,5 +10,13 @@
 .table-cell {
   padding: 10px;
   border: 1px solid gray;
-  background: whitesmoke;
+  background: #fff;
+}
+.table-image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.table-image{
+    width: 100px;
 }

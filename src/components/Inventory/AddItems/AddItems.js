@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+const axios = require("axios").default;
 
 const AddItems = () => {
   const {
@@ -7,10 +8,16 @@ const AddItems = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (data, e) => {
+    const createItems = async () =>{
+      const url = "http://localhost:5000/add-inventory";
+      await axios.post(url, {...data});
+    }
+    createItems()
+    e.target.reset();
   };
-  //  relevant name, image, short description, price, quantity, supplier name,
+
+ 
   return (
     <div className="form-container">
       <h2 className="text-center">Add New Item</h2>
@@ -31,11 +38,21 @@ const AddItems = () => {
           <label>Product Name</label>
           <input
             type="text"
-            {...register("productName", { required: true })}
-            className={`form-control ${errors.productName ? "is-invalid" : ""}`}
+            {...register("name", { required: true })}
+            className={`form-control ${errors.name ? "is-invalid" : ""}`}
           />
           <p className="text-danger">
-            {errors.productName && "Product Name is required"}
+            {errors.name && "Product Name is required"}
+          </p>
+        </div>
+
+        <div className="field">
+          <label>Brand</label>
+          <input type="text" 
+          {...register("brand", {required: true})}
+          className={`form-control ${errors.brand ? "is-invalid" : ""}`}/>
+          <p className="text-danger">
+            {errors.brand && "Brand is required"}
           </p>
         </div>
 
@@ -92,6 +109,9 @@ const AddItems = () => {
             {...register("description", { required: true })}
             className={`form-control ${errors.description ? "is-invalid" : ""}`}
           />
+          <p className="text-danger">
+            {errors.description && "Description is required"}
+          </p>
         </div>
         <input type="submit" value="Add" />
       </form>

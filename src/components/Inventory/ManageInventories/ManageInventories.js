@@ -1,23 +1,63 @@
-import React, { useMemo } from "react";
-import useInventory from "../../../hooks/useInventory";
-import { ReactTable } from "react-table";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table/dist/react-table.development";
 import "./ManageInventory.css";
+import axios from "axios";
 
 const ManageInventories = () => {
-  const [data: items] = useInventory();
-  const handleDelete = (id) => {
-    console.log(id.value);
+  const [isRefresh, setIsRefresh] = useState(false);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const getItems = async () => {
+      const url = "http://localhost:5000/inventory";
+      const { data } = await axios.get(url);
+      setData(data);
+    };
+    getItems();
+  }, [isRefresh]);
+
+  const handleDelete = async (id) => {
+    const _id = id.value;
+    const url = `http://localhost:5000/inventory/${_id}`;
+    await axios.delete(url);
+    setIsRefresh(!isRefresh);
   };
+
   const columns = useMemo(
     () => [
       {
+        Header: "#",
+        Cell: ({ row }) => {
+          return <div className="text-center">{row.index + 1}</div>;
+        },
+      },
+      {
+        Header: "Image",
+        accessor: "image",
+        Cell: ({ cell }) => {
+          return (
+            <div className="table-image-container">
+              <img className="table-image" src={cell.row.values.image} alt="" />
+            </div>
+          );
+        },
+      },
+      {
         Header: "Name",
-        accessor: "name", // accessor is the "key" in the data
+        accessor: "name",
       },
       {
         Header: "Brand",
         accessor: "brand",
+        Cell: ({ cell }) => {
+          return <div className="text-center">{cell.row.values.brand}</div>;
+        },
+      },
+      {
+        Header: "Quantity",
+        accessor: "quantity",
+        Cell: ({ cell }) => {
+          return <div className="text-center">{cell.row.values.quantity}</div>;
+        },
       },
       {
         Header: "Action",
@@ -25,7 +65,8 @@ const ManageInventories = () => {
         accessor: "_id",
         Cell: ({ cell }) => (
           <div className="text-center">
-            <button className="btn btn-danger"
+            <button
+              className="btn btn-danger"
               value={cell.row.values._id}
               onClick={() => handleDelete(cell)}
             >
@@ -37,9 +78,11 @@ const ManageInventories = () => {
     ],
     []
   );
+
   const tableInstance = useTable({ columns, data });
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;
+
   return (
     <div>
       <table {...getTableProps()} className="container my-5">
