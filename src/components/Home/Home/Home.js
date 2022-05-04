@@ -1,20 +1,11 @@
-import React, { useEffect, useState } from "react";
+
+import useInventory from "../../../hooks/useInventory";
 import Banner from "../Banner/Banner";
 import './Home.css'
 
-const axios = require("axios").default;
-
 const Home = () => {
-  const [items, setItems] = useState([]);
+  const [items] = useInventory();
 
-  useEffect(() => {
-    const getItems = async () => {
-      const url = "http://localhost:5000/inventory";
-      const { data } = await axios.get(url);
-      setItems(data);
-    };
-    getItems();
-  }, []);
 
   return (
     <div>
@@ -24,7 +15,7 @@ const Home = () => {
       
           <div className="row row-cols-1 row-cols-lg-3 g-0">
               {
-                  items.slice(0,6).map((item, idx) => <div className="col" keys={idx}>
+                  items.slice(0,6).map((item, idx) => <div className="col" key={idx}>
                       <div className="items">
                       <h3>{item.name}</h3>
                       <h2>{item.brand}</h2>

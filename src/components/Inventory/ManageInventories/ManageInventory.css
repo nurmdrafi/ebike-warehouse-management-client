@@ -1,0 +1,14 @@
+.table-header {
+  border: 1px solid gray;
+  border-bottom: solid 3px gray;
+  background: aliceblue;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+.table-cell {
+  padding: 10px;
+  border: 1px solid gray;
+  background: whitesmoke;
+}
