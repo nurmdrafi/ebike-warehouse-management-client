@@ -69,7 +69,7 @@ const AddItems = () => {
         <div className="field">
           <label>Price</label>
           <input
-            type="number"
+            type="text"
             {...register("price", { required: true })}
             className={`form-control ${errors.price ? "is-invalid" : ""}`}
           />

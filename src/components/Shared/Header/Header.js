@@ -1,12 +1,14 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import CustomLink from "../CustomLink/CustomLink";
+import { useNavigate } from 'react-router';
 
 const Header = () => {
+  let navigate = useNavigate();
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">Warehouse Management System</Navbar.Brand>
+        <Navbar.Brand onClick={() => navigate('/home')} role="button">Warehouse Management System</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">

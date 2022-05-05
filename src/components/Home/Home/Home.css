@@ -1,16 +1,33 @@
-.items {
-  height: 510px;
-  width: 320px;
+.item {
+  height: 650px;
+  max-width: 520px;
   padding: 15px;
   margin: auto;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: flex;
+  flex-direction: column;
+  
 }
 .image-container {
   width: 300px;
   height: 300px;
+  margin: auto;
+  overflow: hidden;
 }
 
-img {
+.image-container img {
   height: 100%;
   width: 100%;
   object-fit: contain;
+  transition: all 0.3s ease-in-out;
+}
+.image-container:hover img{
+  transform: scale(1.1);
+}
+
+.item-container button{
+  width: 100%;
+  margin-top: auto;
 }
