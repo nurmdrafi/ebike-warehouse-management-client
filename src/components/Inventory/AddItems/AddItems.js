@@ -1,5 +1,4 @@
 import React from "react";
-import { Placeholder } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 const axios = require("axios").default;
@@ -14,12 +13,12 @@ const AddItems = () => {
     const createItems = async () => {
       const url = "http://localhost:5000/add-inventory";
       await axios.post(url, { ...data })
-      .then((response) => {
+      .then((res) => {
         toast.success('New item added')
       })
-      .catch(error =>{
+      .catch(err =>{
         // error.message
-        toast.error(error.message)
+        toast.error(err.message)
       })
     };
     createItems();
