@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/home" element={<Home></Home>}></Route>
-        <Route path="/inventory/:id" element={<Inventory></Inventory>}></Route>
+        <Route path="/inventory/:_id" element={<Inventory></Inventory>}></Route>
         <Route path="/manage-inventory" element={<ManageInventories></ManageInventories>}></Route>
         <Route path="/add-items" element={<AddItems></AddItems>}></Route>
         <Route path="/my-items" element={<MyItems></MyItems>}></Route>

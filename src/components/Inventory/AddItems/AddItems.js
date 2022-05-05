@@ -1,4 +1,5 @@
 import React from "react";
+import { Placeholder } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 const axios = require("axios").default;
@@ -90,6 +91,7 @@ const AddItems = () => {
             type="text"
             {...register("price", { required: true })}
             className={`form-control ${errors.price ? "is-invalid" : ""}`}
+            placeholder="e.g. 1,000.00"
           />
           <p className="text-danger">{errors.price && "Price is required"}</p>
         </div>

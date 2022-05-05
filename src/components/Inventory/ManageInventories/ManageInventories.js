@@ -18,10 +18,8 @@ const ManageInventories = () => {
   const handleDelete = async (id) => {
     const _id = id.value;
     const url = `http://localhost:5000/inventory/${_id}`;
-    await axios.delete(url).then((response) => {
-      if (response) {
-        setIsRefresh(!isRefresh);
-      }
+    await axios.delete(url).then((res) => {
+      setIsRefresh(!isRefresh);
     });
   };
 

@@ -1,11 +1,12 @@
 import useInventory from "../../../hooks/useInventory";
 import Banner from "../Banner/Banner";
 import "./Home.css";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
 
 const Home = () => {
   let navigate = useNavigate();
   const [items] = useInventory();
+
   return (
     <div>
       <Banner></Banner>
@@ -16,22 +17,32 @@ const Home = () => {
           {items.slice(0, 6).map((item, idx) => (
             <div className="col item-container" key={idx}>
               <div className="item">
-                <h5>Name: {item.name}</h5>
-                <h5>Brand: {item.brand}</h5>
+                <h4>{item.name}</h4>
                 <div className="image-container">
                   <img src={item.image} alt="" />
                 </div>
+                <h5 className="text-secondary text-uppercase">{item.brand}</h5>
                 <h5>Price: ${item.price}</h5>
                 <h5>Description</h5>
                 <p>{item.description}</p>
-                <p className="fs-5">Supplier Name: {item.supplierName}</p>
-                <button className="btn btn-dark" onClick={()=> navigate(`/inventory/${item._id}`)}>Stock Update</button>
+                <h4 className="fs-6">Supplier Name: {item.supplierName}</h4>
+                <button
+                  className="btn btn-dark"
+                  onClick={() => navigate(`/inventory/${item._id}`)}
+                >
+                  Stock Update
+                </button>
               </div>
             </div>
           ))}
         </div>
         <div className="d-flex justify-content-center my-5">
-        <button className="btn btn-outline-dark mx-auto" onClick={() => navigate('/manage-inventory')}>Manage Inventories</button>
+          <button
+            className="btn btn-outline-dark mx-auto"
+            onClick={() => navigate("/manage-inventory")}
+          >
+            Manage Inventories
+          </button>
         </div>
       </section>
     </div>
