@@ -18,8 +18,11 @@ const ManageInventories = () => {
   const handleDelete = async (id) => {
     const _id = id.value;
     const url = `http://localhost:5000/inventory/${_id}`;
-    await axios.delete(url);
-    setIsRefresh(!isRefresh);
+    await axios.delete(url).then((response) => {
+      if (response) {
+        setIsRefresh(!isRefresh);
+      }
+    });
   };
 
   const columns = useMemo(
@@ -76,7 +79,7 @@ const ManageInventories = () => {
         ),
       },
     ],
-    []
+    [isRefresh]
   );
 
   const tableInstance = useTable({ columns, data });

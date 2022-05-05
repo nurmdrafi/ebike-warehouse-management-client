@@ -12,7 +12,7 @@ const Home = () => {
       {/* Item section */}
       <section className="container">
         <h1 className="text-center my-5 py-5">Featured Items</h1>
-        <div className="row row-cols-1 row-cols-lg-3 g-4">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {items.slice(0, 6).map((item, idx) => (
             <div className="col item-container" key={idx}>
               <div className="item">
@@ -25,7 +25,7 @@ const Home = () => {
                 <h5>Description</h5>
                 <p>{item.description}</p>
                 <p className="fs-5">Supplier Name: {item.supplierName}</p>
-                <button className="btn btn-dark" >Update</button>
+                <button className="btn btn-dark" onClick={()=> navigate(`/inventory/${item._id}`)}>Stock Update</button>
               </div>
             </div>
           ))}
