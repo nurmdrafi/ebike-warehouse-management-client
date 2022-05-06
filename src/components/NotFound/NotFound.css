@@ -1,0 +1,17 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .not-found .details{
+    padding-top: 5%;
+    min-height: calc(100vh - 202px);
+  }
+  .not-found button{
+    border: 0;
+    padding: 10px;
+  }
+  .not-found button:hover{
+    background-color: lightseagreen;
+  }
+  
