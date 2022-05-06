@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] = useSignInWithGoogle(auth);
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
   const {
     register,
     setError,
@@ -50,24 +54,24 @@ const Register = () => {
     reset();
   };
 
-
+  // Toast Notification
   useEffect(() => {
     if (user || userGoogle) {
       toast.success("Successfully Sign In");
     }
   }, [user, userGoogle]);
-  useEffect(() =>{
+  useEffect(() => {
     if (error) {
       toast.error(error?.message, {
-        id: "email/password error"
+        id: "email/password error",
       });
     }
-    if(errorGoogle){
-      toast.error(errorGoogle?.message,{
-        id: "google error"
+    if (errorGoogle) {
+      toast.error(errorGoogle?.message, {
+        id: "google error",
       });
     }
-  }, [error, errorGoogle])
+  }, [error, errorGoogle]);
 
   if (loading || loadingGoogle) {
     return (
@@ -78,7 +82,6 @@ const Register = () => {
       </div>
     );
   }
-  
 
   return (
     <div className="form-container">
@@ -146,7 +149,7 @@ const Register = () => {
           <input
             type="password"
             {...register("password", { required: true })}
-            placeholder="Create a password with 8 characters"
+            placeholder="Create a password"
             className={`form-control ${errors.password ? "is-invalid" : ""}`}
           />
           {/* Error Message */}

@@ -5,12 +5,10 @@ import { useNavigate } from "react-router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
 
 const Header = () => {
   let navigate = useNavigate();
   const [user] = useAuthState(auth);
-  console.log(user);
   return (
     <Navbar bg="light" expand="lg">
       <Container style={{ minHeight: "50px" }}>
