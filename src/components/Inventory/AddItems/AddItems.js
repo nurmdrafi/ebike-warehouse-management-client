@@ -11,15 +11,16 @@ const AddItems = () => {
   } = useForm();
   const onSubmit = (data, e) => {
     const createItems = async () => {
-      const url = "http://localhost:5000/add-inventory";
-      await axios.post(url, { ...data })
-      .then((res) => {
-        toast.success('New item added')
-      })
-      .catch(err =>{
-        // error.message
-        toast.error(err.message)
-      })
+      const url = "https://ebike-warehouse.herokuapp.com/add-inventory";
+      await axios
+        .post(url, { ...data })
+        .then((res) => {
+          toast.success("New item added");
+        })
+        .catch((err) => {
+          // error.message
+          toast.error(err.message);
+        });
     };
     createItems();
     e.target.reset();

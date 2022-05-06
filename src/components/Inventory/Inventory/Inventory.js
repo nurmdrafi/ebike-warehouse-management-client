@@ -17,7 +17,7 @@ const Inventory = () => {
 
   useEffect(() => {
     const getSingleItem = async () => {
-      const url = `http://localhost:5000/inventory/${_id}`;
+      const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
       const { data } = await axios.get(url);
       setItem(data);
     };
@@ -28,26 +28,25 @@ const Inventory = () => {
     const quantity = item.quantity;
     const decreaseQuantity = quantity - 1;
     const newObj = { ...item, quantity: decreaseQuantity };
-    const url = `http://localhost:5000/inventory/${_id}`;
+    const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
     await axios.put(url, newObj).then((res) => {
       setIsRefresh(!isRefresh);
     });
   };
 
- const onSubmit = async (data, e) => {
-     const quantity = parseInt(item.quantity);
-     const increaseQuantity = quantity + parseInt(data.quantity)
-     const newObj = {...item, quantity: increaseQuantity}
-    const url = `http://localhost:5000/inventory/${_id}`;
+  const onSubmit = async (data, e) => {
+    const quantity = parseInt(item.quantity);
+    const increaseQuantity = quantity + parseInt(data.quantity);
+    const newObj = { ...item, quantity: increaseQuantity };
+    const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
     await axios.put(url, newObj).then((res) => {
-        setIsRefresh(!isRefresh);
-        e.target.reset();
-      });
-    
+      setIsRefresh(!isRefresh);
+      e.target.reset();
+    });
   };
   return (
     <div>
-      <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 my-5 container mx-auto">
+      <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 my-5 container mx-auto single-item">
         {/* image */}
         <div className="image-container col mx-md-auto">
           <img src={item?.image} alt="" />
@@ -90,20 +89,31 @@ const Inventory = () => {
 
       {/* Restock item */}
       <div className="container">
-        <form onSubmit={handleSubmit(onSubmit)} className="w-50 mx-auto">
-          <div className="field">
-            <label className="">Quantity</label>
-            <input
-              type="text"
-              {...register("quantity", { required: true })}
-              className={`form-control ${errors.quantity ? "is-invalid" : ""}`}
-            />
-            <p className="text-danger">
-              {errors.quantity && "Quantity Name is required"}
-            </p>
+        <div className="row">
+          <div className="col-md-6 offset-md-6 gx-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="restoke-form">
+              <div className="field">
+                <h2>Restoke the items</h2>
+                <label className="my-2 fw-bold">Quantity</label>
+                <input
+                  type="text"
+                  {...register("quantity", { required: true })}
+                  className={`form-control ${
+                    errors.quantity ? "is-invalid" : ""
+                  }`}
+                />
+                <p className="text-danger">
+                  {errors.quantity && "Quantity Name is required"}
+                </p>
+              </div>
+              <input
+                type="submit"
+                value="Add Quantity"
+                className="btn btn-outline-success"
+              ></input>
+            </form>
           </div>
-          <input type="submit" value="Add Quantity" className="btn btn-outline-success" ></input>
-        </form>
+        </div>
       </div>
     </div>
   );

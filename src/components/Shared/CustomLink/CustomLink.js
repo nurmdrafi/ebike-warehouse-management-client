@@ -7,7 +7,7 @@ const CustomLink = ({ children, to, ...props }) => {
   return (
     <div>
       <Link
-        className="m-3"
+        className="m-2 d-inline-block"
         style={{ color: match ? "red" : "black", textDecoration: "none" }}
         to={to}
         {...props}

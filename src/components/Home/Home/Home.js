@@ -23,6 +23,7 @@ const Home = () => {
                 </div>
                 <h5 className="text-secondary text-uppercase">{item.brand}</h5>
                 <h5>Price: ${item.price}</h5>
+                <h5>Stock Available: {item.quantity}</h5>
                 <h5>Description</h5>
                 <p>{item.description}</p>
                 <h4 className="fs-6">Supplier Name: {item.supplierName}</h4>

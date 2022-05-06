@@ -1,14 +1,22 @@
 import React from "react";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import CustomLink from "../CustomLink/CustomLink";
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase.init";
+import { signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   let navigate = useNavigate();
+  const [user] = useAuthState(auth);
+  console.log(user);
   return (
     <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand onClick={() => navigate('/home')} role="button">Warehouse Management System</Navbar.Brand>
+      <Container style={{ minHeight: "50px" }}>
+        <Navbar.Brand onClick={() => navigate("/home")} role="button">
+          Warehouse Management System
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
@@ -17,8 +25,19 @@ const Header = () => {
             <CustomLink to="/add-items">Add Items</CustomLink>
             <CustomLink to="/my-items">My Items</CustomLink>
             <CustomLink to="/blogs">Blogs</CustomLink>
-            <CustomLink to="/login">Log In</CustomLink>
-            <CustomLink to="/register">Register</CustomLink>
+            {user ? (
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => signOut(auth)}
+              >
+                Log Out
+              </button>
+            ) : (
+              <div className="d-flex">
+                <CustomLink to="/login">Log In</CustomLink>
+                <CustomLink to="/register">Register</CustomLink>
+              </div>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

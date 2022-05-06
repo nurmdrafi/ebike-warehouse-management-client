@@ -8,7 +8,7 @@ const ManageInventories = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     const getItems = async () => {
-      const url = "http://localhost:5000/inventory";
+      const url = "https://ebike-warehouse.herokuapp.com/inventory";
       const { data } = await axios.get(url);
       setData(data);
     };
@@ -17,7 +17,7 @@ const ManageInventories = () => {
 
   const handleDelete = async (id) => {
     const _id = id.value;
-    const url = `http://localhost:5000/inventory/${_id}`;
+    const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
     await axios.delete(url).then((res) => {
       setIsRefresh(!isRefresh);
     });
