@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -7,6 +7,7 @@ import {
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../../Shared/Loading/Loading";
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
@@ -74,13 +75,7 @@ const Register = () => {
   }, [error, errorGoogle]);
 
   if (loading || loadingGoogle) {
-    return (
-      <div className="d-flex justify-content-center my-5 py-5">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
+    return <Loading/>
   }
 
   return (

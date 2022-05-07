@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Inventory.css";
-
-const axios = require("axios").default;
+import axios from "axios";
 const Inventory = () => {
   const { _id } = useParams();
   const [item, setItem] = useState();
   const [isRefresh, setIsRefresh] = useState(false);
+
 
   const {
     register,
@@ -20,6 +20,7 @@ const Inventory = () => {
       const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
       const { data } = await axios.get(url);
       setItem(data);
+  
     };
     getSingleItem();
   }, [isRefresh]);
@@ -86,7 +87,7 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-
+     
       {/* Restock item */}
       <div className="container">
         <div className="row">

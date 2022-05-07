@@ -2,17 +2,21 @@ import useInventory from "../../../hooks/useInventory";
 import Banner from "../Banner/Banner";
 import "./Home.css";
 import { useNavigate } from "react-router";
+import { useState } from "react";
+import Loading from "../../Shared/Loading/Loading";
 
 const Home = () => {
-  let navigate = useNavigate();
-  const [items] = useInventory();
-
+  const navigate = useNavigate();
+  const [items, setItems, isLoading] = useInventory();
   return (
     <div>
       <Banner></Banner>
       {/* Item section */}
       <section className="container">
         <h1 className="text-center my-5 py-5">Featured Items</h1>
+        {
+          isLoading ? <Loading/> :
+       
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           {items.slice(0, 6).map((item, idx) => (
             <div className="col item-container" key={idx}>
@@ -37,6 +41,7 @@ const Home = () => {
             </div>
           ))}
         </div>
+         }
         <div className="d-flex justify-content-center my-5">
           <button
             className="btn btn-outline-dark mx-auto"

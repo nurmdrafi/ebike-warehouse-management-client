@@ -10,6 +10,7 @@ import {
 import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
+import Loading from "../../Shared/Loading/Loading";
 
 const customStyles = {
   content: {
@@ -87,13 +88,6 @@ const LogIn = () => {
   }, [user]);
 
   useEffect(() => {
-    if(errorReset){
-      toast.error(error?.message, {
-        id: "errorReset",
-      });
-    }
-  }, [errorReset]);
-  useEffect(() => {
     if (error) {
       toast.error(error?.message, {
         id: "email/password error",
@@ -101,14 +95,18 @@ const LogIn = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    if(errorReset){
+      toast.error(error?.message, {
+        id: "errorReset",
+      });
+    }
+  }, [errorReset]);
+
+ 
+
   if (loading || sendingReset) {
-    return (
-      <div className="d-flex justify-content-center my-5 py-5">
-        <div className="spinner-border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
-    );
+    return <Loading/>
   }
 
   return (
