@@ -1,9 +1,13 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
+import auth from "../../../firebase.init";
+import Loading from "../../Shared/Loading/Loading";
 const axios = require("axios").default;
 
 const AddItems = () => {
+  const [user, userLoading] = useAuthState(auth);
   const {
     register,
     handleSubmit,
@@ -24,7 +28,12 @@ const AddItems = () => {
     };
     createItems();
     e.target.reset();
+
   };
+
+  if (userLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="form-container container">
@@ -41,16 +50,19 @@ const AddItems = () => {
           <label>User Email</label>
           <input
             type="text"
-            {...register("userEmail", { required: true })}
+            {...register("userEmail")}
             className={`form-control ${errors.userEmail ? "is-invalid" : ""}`}
+            placeholder={user?.email}
+            readOnly
+            value={user?.email}
           />
           <p className="text-danger">
-            {errors.userEmail && "User Email is required"}
+            {errors.email && "Product Name is required"}
           </p>
         </div>
 
         {/* product name */}
-        <div className="field">
+        <div className="field mt-3">
           <label>Product Name</label>
           <input
             type="text"

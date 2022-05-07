@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import "./Inventory.css";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 const Inventory = () => {
   const { _id } = useParams();
   const [item, setItem] = useState();
   const [isRefresh, setIsRefresh] = useState(false);
-
+  const navigate = useNavigate();
 
   const {
     register,
@@ -20,7 +22,6 @@ const Inventory = () => {
       const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
       const { data } = await axios.get(url);
       setItem(data);
-  
     };
     getSingleItem();
   }, [isRefresh]);
@@ -32,6 +33,7 @@ const Inventory = () => {
     const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
     await axios.put(url, newObj).then((res) => {
       setIsRefresh(!isRefresh);
+      toast.success("1 item delivered");
     });
   };
 
@@ -43,10 +45,12 @@ const Inventory = () => {
     await axios.put(url, newObj).then((res) => {
       setIsRefresh(!isRefresh);
       e.target.reset();
+      toast.success(`New ${data.quantity} items added.`);
     });
   };
   return (
     <div>
+      <Toaster />
       <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 my-5 container mx-auto single-item">
         {/* image */}
         <div className="image-container col mx-md-auto">
@@ -87,11 +91,21 @@ const Inventory = () => {
           </div>
         </div>
       </div>
-     
+
       {/* Restock item */}
       <div className="container">
-        <div className="row">
-          <div className="col-md-6 offset-md-6 gx-4">
+        <div className="row pe-3">
+          <div className="col-md-6 order-2 order-md-1">
+            <div className="d-flex justify-content-center align-items-center" style={{height: '255px'}}>
+              <button
+                className="btn btn-outline-dark mx-auto "
+                onClick={() => navigate("/manage-inventory")}
+              >
+                Manage Inventories
+              </button>
+            </div>
+          </div>
+          <div className="col-md-6 gx-5 order-1 order-md-2">
             <form onSubmit={handleSubmit(onSubmit)} className="restoke-form">
               <div className="field">
                 <h2>Restoke the items</h2>
@@ -104,7 +118,7 @@ const Inventory = () => {
                   }`}
                 />
                 <p className="text-danger">
-                  {errors.quantity && "Quantity Name is required"}
+                  {errors.quantity && "Quantity is required"}
                 </p>
               </div>
               <input

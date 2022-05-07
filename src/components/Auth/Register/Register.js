@@ -10,8 +10,10 @@ import toast, { Toaster } from "react-hot-toast";
 import Loading from "../../Shared/Loading/Loading";
 
 const Register = () => {
+  // Create user with email and password
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
+    // Sign in with google
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
   const {

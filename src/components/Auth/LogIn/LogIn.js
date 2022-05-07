@@ -6,6 +6,7 @@ import { FcGoogle } from "react-icons/fc";
 import {
   useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
@@ -40,6 +41,9 @@ const LogIn = () => {
   // Send password reset email
   const [sendPasswordResetEmail, sendingReset, errorReset] =
     useSendPasswordResetEmail(auth);
+    // Sign in with google
+    const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+    useSignInWithGoogle(auth);
   const onSubmit = (data) => {
     setEmail(data.email);
     setPassword(data.password);
@@ -82,10 +86,10 @@ const LogIn = () => {
 
   // Toast Notification
   useEffect(() => {
-    if (user) {
+    if (user || userGoogle) {
       toast.success("Successfully Logged In");
     }
-  }, [user]);
+  }, [user, userGoogle]);
 
   useEffect(() => {
     if (error) {
@@ -94,6 +98,14 @@ const LogIn = () => {
       });
     }
   }, [error]);
+
+  useEffect(() => {
+    if (errorGoogle) {
+      toast.error(errorGoogle?.message, {
+        id: "google auth error",
+      });
+    }
+  }, [errorGoogle]);
 
   useEffect(() => {
     if(errorReset){
@@ -105,7 +117,7 @@ const LogIn = () => {
 
  
 
-  if (loading || sendingReset) {
+  if (loading || sendingReset || loadingGoogle) {
     return <Loading/>
   }
 
@@ -174,7 +186,7 @@ const LogIn = () => {
         ></div>
       </div>
       {/* Sign in with google button*/}
-      <button className="google-btn">
+      <button className="google-btn" onClick={() => signInWithGoogle(email)}>
         <div className="google-icon">
           <FcGoogle />
         </div>{" "}

@@ -2,10 +2,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTable } from "react-table/dist/react-table.development";
 import "./ManageInventory.css";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const ManageInventories = () => {
   const [isRefresh, setIsRefresh] = useState(false);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     const getItems = async () => {
       const url = "https://ebike-warehouse.herokuapp.com/inventory";
@@ -17,10 +20,14 @@ const ManageInventories = () => {
 
   const handleDelete = async (id) => {
     const _id = id.value;
-    const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
-    await axios.delete(url).then((res) => {
-      setIsRefresh(!isRefresh);
-    });
+    const proceed = window.confirm("Are you sure want to delete?");
+    if (proceed) {
+      const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
+      await axios.delete(url).then((res) => {
+        setIsRefresh(!isRefresh);
+        toast.success("Delete successful.")
+      });
+    }
   };
 
   const columns = useMemo(
@@ -85,8 +92,12 @@ const ManageInventories = () => {
     tableInstance;
 
   return (
-    <div>
-      <table {...getTableProps()} className="container my-5">
+    <div className="container">
+      <Toaster/>
+      <div className="d-flex justify-content-end mt-5">
+        <button className="btn btn-success" onClick={() => navigate("/add-items")}>Add New Item</button>
+      </div>
+      <table {...getTableProps()} className="container my-4">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
