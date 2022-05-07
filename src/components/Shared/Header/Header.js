@@ -13,7 +13,7 @@ const Header = () => {
     <Navbar bg="light" expand="lg">
       <Container style={{ minHeight: "50px" }}>
         <Navbar.Brand onClick={() => navigate("/home")} role="button">
-          Warehouse Management System
+          Ebike Warehouse
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

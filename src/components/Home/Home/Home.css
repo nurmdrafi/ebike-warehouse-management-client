@@ -54,3 +54,6 @@
   cursor: grab;
   overflow: hidden;
 }
+.leaflet-container{
+  height: 500px !important;
+}

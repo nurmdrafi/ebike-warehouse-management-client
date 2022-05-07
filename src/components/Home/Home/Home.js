@@ -5,6 +5,18 @@ import { useNavigate } from "react-router";
 import { useState, useEffect, useRef } from "react";
 import Loading from "../../Shared/Loading/Loading";
 import { motion } from "framer-motion";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import icon from 'leaflet/dist/images/marker-icon.png';
+import L from 'leaflet';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+    iconUrl: icon,
+    shadowUrl: iconShadow
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const Home = () => {
   const navigate = useNavigate();
@@ -12,7 +24,8 @@ const Home = () => {
   const [width, setWidth] = useState(0);
   const carousel = useRef();
   useEffect(() => {
-    setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    console.log(carousel.current.scrollWidth, carousel.current.offsetWidth);
+    setWidth(3940 - 1296);
   }, []);
 
   return (
@@ -61,6 +74,7 @@ const Home = () => {
         </div>
       </section>
       {/* Slider */}
+      <h1 className="text-center my-5 py-5">Image Gallery</h1>
       <section className="container">
         <motion.div className="carousel" ref={carousel}>
           <motion.div
@@ -75,6 +89,25 @@ const Home = () => {
             ))}
           </motion.div>
         </motion.div>
+      </section>
+      {/* Location */}
+      <section className="container-fluid p-0">
+      <h1 className="text-center my-5 py-5">Location</h1>
+        <MapContainer
+          center={[23.7934, 90.4064]}
+          zoom={16}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[23.7934, 90.4064]}>
+            <Popup>
+              Ebike Warehouse
+            </Popup>
+          </Marker>
+        </MapContainer>
       </section>
     </div>
   );
