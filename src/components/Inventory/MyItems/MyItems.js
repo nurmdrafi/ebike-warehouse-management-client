@@ -5,23 +5,33 @@ import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import axiosPrivate from '../../../api/axiosPrivate';
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router";
 
 const MyItems = () => {
   const [user, userLoading] = useAuthState(auth);
   const [isRefresh, setIsRefresh] = useState(false);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+
   const getItemsByEmail = async () => {
       const email = user?.email;
       if(email){
-        const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`;
-        await axios.get(url)
-        .then(({data}) => {
-            setData(data)
-        })
-        .catch(err =>{
-            console.log(err)
-        })
+        // const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`;
+        const url = `http://localhost:5000/inventory?userEmail=${email}`
+        try{
+          const {data} = await axiosPrivate.get(url);
+          setData(data)
+        }
+        catch(error){
+          console.log(error.message);
+                if(error.response.status === 401 || error.response.status === 403){
+                    signOut(auth);
+                    navigate('/login')
+        }
       }
+    }
   };
 
   useEffect(() => {

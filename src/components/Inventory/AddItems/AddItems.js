@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
-const axios = require("axios").default;
+import axios from "axios";
 
 const AddItems = () => {
   const [user, userLoading] = useAuthState(auth);

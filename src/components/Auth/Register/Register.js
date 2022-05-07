@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -13,9 +13,10 @@ const Register = () => {
   // Create user with email and password
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-    // Sign in with google
+  // Sign in with google
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
+
   const {
     register,
     setError,
@@ -77,7 +78,7 @@ const Register = () => {
   }, [error, errorGoogle]);
 
   if (loading || loadingGoogle) {
-    return <Loading/>
+    return <Loading />;
   }
 
   return (

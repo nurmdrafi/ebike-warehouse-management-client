@@ -5,11 +5,14 @@ import { useNavigate } from "react-router";
 import "./Inventory.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+
+
 const Inventory = () => {
   const { _id } = useParams();
   const [item, setItem] = useState();
   const [isRefresh, setIsRefresh] = useState(false);
   const navigate = useNavigate();
+  
 
   const {
     register,

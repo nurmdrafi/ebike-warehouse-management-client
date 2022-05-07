@@ -12,6 +12,7 @@ import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "react-modal";
 import Loading from "../../Shared/Loading/Loading";
+import axios from "axios";
 
 const customStyles = {
   content: {
@@ -26,7 +27,6 @@ const customStyles = {
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const {
     register,
@@ -35,20 +35,23 @@ const LogIn = () => {
     setError,
     reset,
   } = useForm();
+
   // Sign in with email and password
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
+
   // Send password reset email
   const [sendPasswordResetEmail, sendingReset, errorReset] =
     useSendPasswordResetEmail(auth);
-    // Sign in with google
-    const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
+
+  // Sign in with google
+  const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
+
   const onSubmit = (data) => {
     setEmail(data.email);
-    setPassword(data.password);
     // Email Validation
-    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+    if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
       setError("email", {
         type: "validate",
         message: "Please provide a valid email.",
@@ -56,7 +59,19 @@ const LogIn = () => {
     }
 
     // Sign in with email and password
-    signInWithEmailAndPassword(email, password);
+    signInWithEmailAndPassword(data.email, data.password);
+    // create jwt token
+    axios
+      .post("http://localhost:5000/login", {
+        email,
+      })
+      .then(({ data }) => {
+        localStorage.setItem("accessToken", data.accessToken);
+        // navigate(from, { replace: true });
+      });
+
+    
+
     // reset input field
     reset();
   };
@@ -96,6 +111,7 @@ const LogIn = () => {
       toast.error(error?.message, {
         id: "email/password error",
       });
+      console.log(error);
     }
   }, [error]);
 
@@ -108,17 +124,15 @@ const LogIn = () => {
   }, [errorGoogle]);
 
   useEffect(() => {
-    if(errorReset){
+    if (errorReset) {
       toast.error(error?.message, {
         id: "errorReset",
       });
     }
   }, [errorReset]);
 
- 
-
   if (loading || sendingReset || loadingGoogle) {
-    return <Loading/>
+    return <Loading />;
   }
 
   return (
