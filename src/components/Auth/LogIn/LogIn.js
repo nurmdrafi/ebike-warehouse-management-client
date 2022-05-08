@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Login.css";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -28,8 +28,11 @@ const customStyles = {
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState("");
 
   const navigate = useNavigate();
+    let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
 
   const {
     register,
@@ -71,12 +74,25 @@ const LogIn = () => {
       })
       .then(({ data }) => {
         localStorage.setItem("accessToken", data.accessToken);
-        navigate("/home");
+        setToken(data.accessToken)
       });
 
     // reset input field
     reset();
   };
+
+  // Navigate
+  useEffect(() => {
+    if(user && token){
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate, token]);
+
+  useEffect(() => {
+    if(userGoogle){
+      navigate(from, { replace: true });
+    }
+  }, [userGoogle, from, navigate]);
 
   // Forget password & Modal
   const [modalIsOpen, setIsOpen] = useState(false);
