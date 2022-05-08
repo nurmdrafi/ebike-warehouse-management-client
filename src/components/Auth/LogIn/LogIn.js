@@ -27,7 +27,6 @@ const customStyles = {
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
   const navigate = useNavigate();
@@ -66,19 +65,21 @@ const LogIn = () => {
 
     
     // Sign in with email and password
-    signInWithEmailAndPassword(data.email, data.password);
-    // create jwt token
-    axios
-      .post("http://localhost:5000/login", {
-        email: data.email
-      })
-      .then(({ data }) => {
-        localStorage.setItem("accessToken", data.accessToken);
-        setToken(data.accessToken)
-      });
+    signInWithEmailAndPassword(data.email, data.password).then(() =>{
+      // JWT
+      axios
+        .post("https://ebike-warehouse.herokuapp.com/login", {
+          email: data.email
+        })
+        .then(({ data }) => {
+          localStorage.setItem("accessToken", data.accessToken);
+          setToken(data.accessToken)
+        });
+        // reset input field
+        reset();
+    })
 
-    // reset input field
-    reset();
+
   };
 
   // Navigate
@@ -105,13 +106,13 @@ const LogIn = () => {
     setIsOpen(false);
   }
 
-  const handleForgetPassword = (e) => {
+  const handleForgetPassword = async (e) => {
     e.preventDefault();
     const email = e.target.forgetEmail.value;
-    if (!email) {
+    if (email === "") {
       toast.error("Please enter your email");
     } else {
-      sendPasswordResetEmail(email);
+      await sendPasswordResetEmail(email);
       toast.success("Email Send, Please check your email box.");
       e.target.reset();
     }

@@ -19,7 +19,7 @@ const MyItems = () => {
       const email = user?.email;
       if(email){
         // const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`;
-        const url = `http://localhost:5000/inventory?userEmail=${email}`
+        const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`
         try{
           const {data} = await axiosPrivate.get(url);
           setData(data)
