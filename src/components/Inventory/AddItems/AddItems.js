@@ -36,7 +36,7 @@ const AddItems = () => {
   }
 
   return (
-    <div className="form-container container">
+    <div className="form-container container" style={{minHeight: "calc(100vh - 185px)"}}>
       <div>
         <Toaster position="top-right" reverseOrder={false} />
       </div>

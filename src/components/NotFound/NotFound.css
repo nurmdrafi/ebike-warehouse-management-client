@@ -5,7 +5,7 @@
   }
   .not-found .details{
     padding-top: 5%;
-    min-height: 80vh;
+    min-height: calc(100vh - 185px);    
   }
   .not-found button{
     border: 0;

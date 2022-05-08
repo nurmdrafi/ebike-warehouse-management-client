@@ -52,7 +52,7 @@ const Inventory = () => {
     });
   };
   return (
-    <div>
+    <div style={{minHeight: "calc(100vh - 185px)"}}>
       <Toaster />
       <div className="row row-cols-1 row-cols-md-1 row-cols-lg-2 my-5 container mx-auto single-item">
         {/* image */}

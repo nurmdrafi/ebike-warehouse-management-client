@@ -12,6 +12,7 @@ import { useNavigate } from "react-router";
 const MyItems = () => {
   const [user, userLoading] = useAuthState(auth);
   const [isRefresh, setIsRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
@@ -22,7 +23,8 @@ const MyItems = () => {
         const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`
         try{
           const {data} = await axiosPrivate.get(url);
-          setData(data)
+          setIsLoading(!isLoading);
+          setData(data);
         }
         catch(error){
           console.log(error.message);
@@ -114,8 +116,9 @@ const MyItems = () => {
         return <Loading/>
       }
 
-  return <div className="container" style={{minHeight: "80vh"}}>
+  return <div className="container" style={{minHeight: "calc(100vh - 185px)"}}>
   <Toaster/>
+  {isLoading ? <Loading/> : 
   <table {...getTableProps()} className="container my-4">
     <thead>
       {headerGroups.map((headerGroup) => (
@@ -145,6 +148,7 @@ const MyItems = () => {
       })}
     </tbody>
   </table>
+  }
 </div>
 };
 

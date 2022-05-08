@@ -20,11 +20,11 @@ const Header = () => {
           <Nav className="ms-auto">
             <CustomLink to="/">Home</CustomLink>
             {user && (
-              <div className="d-flex">
+              <span className="d-block d-lg-flex">
                 <CustomLink to="/manage-inventory">Manage Items</CustomLink>
                 <CustomLink to="/add-items">Add Item</CustomLink>
                 <CustomLink to="/my-items">My Items</CustomLink>
-              </div>
+              </span>
             )}
 
             <CustomLink to="/blogs">Blogs</CustomLink>

@@ -155,7 +155,7 @@ const LogIn = () => {
   }
 
   return (
-    <div className="form-container my-5">
+    <div className="form-container my-5" style={{minHeight: "calc(100vh - 185px)"}}>
       <div>
         <Toaster />
       </div>

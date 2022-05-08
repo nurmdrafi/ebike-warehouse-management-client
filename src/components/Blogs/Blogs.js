@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 
 const Blogs = () => {
   return (
-    <div className="container my-5">
+    <div className="container my-5" style={{minHeight: "calc(100vh - 185px)"}}>
       <div className="py-4">
         {/* Question 1 */}
         <h2 className="mb-5">

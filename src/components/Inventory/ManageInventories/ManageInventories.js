@@ -4,15 +4,18 @@ import "./ManageInventory.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Loading from '../../Shared/Loading/Loading.js'
 
 const ManageInventories = () => {
   const [isRefresh, setIsRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     const getItems = async () => {
       const url = "https://ebike-warehouse.herokuapp.com/inventory";
       const { data } = await axios.get(url);
+      setIsLoading(false);
       setData(data);
     };
     getItems();
@@ -92,11 +95,13 @@ const ManageInventories = () => {
     tableInstance;
 
   return (
-    <div className="container" style={{minHeight: "80vh"}}>
+    <div className="container" style={{minHeight: "calc(100vh - 185px)"}}>
       <Toaster/>
+      
       <div className="d-flex justify-content-end mt-5">
         <button className="btn btn-success" onClick={() => navigate("/add-items")}>Add New Item</button>
       </div>
+      {isLoading ? <Loading/> :
       <table {...getTableProps()} className="container my-4">
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -126,6 +131,7 @@ const ManageInventories = () => {
           })}
         </tbody>
       </table>
+      }
     </div>
   );
 };

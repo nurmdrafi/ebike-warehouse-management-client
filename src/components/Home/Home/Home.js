@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{minHeight: "calc(100vh - 185px)"}}>
       <Banner></Banner>
       {/* Item section */}
       <section className="container">

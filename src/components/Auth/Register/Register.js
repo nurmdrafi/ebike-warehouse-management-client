@@ -69,7 +69,7 @@ const Register = () => {
       navigate(from, { replace: true });
     }
   }, [user, from, navigate]);
-  
+
   // Toast Notification
   useEffect(() => {
     if (user || userGoogle) {
@@ -94,7 +94,7 @@ const Register = () => {
   }
 
   return (
-    <div className="form-container my-5">
+    <div className="form-container my-5" style={{minHeight: "calc(100vh - 185px)"}}>
       <div>
         <Toaster />
       </div>
