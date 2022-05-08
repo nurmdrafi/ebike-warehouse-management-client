@@ -8,13 +8,16 @@ import {
 import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../../Shared/Loading/Loading";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
   // Create user with email and password
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
+    useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
   // Sign in with google
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
@@ -60,11 +63,13 @@ const Register = () => {
     reset();
   };
 
-  useEffect(() =>{
+   // Navigate
+   useEffect(() => {
     if(user){
-      navigate('/home')
+      navigate(from, { replace: true });
     }
-  }, [])
+  }, [user, from, navigate]);
+  
   // Toast Notification
   useEffect(() => {
     if (user || userGoogle) {
