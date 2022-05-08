@@ -92,7 +92,7 @@ const ManageInventories = () => {
     tableInstance;
 
   return (
-    <div className="container">
+    <div className="container" style={{minHeight: "80vh"}}>
       <Toaster/>
       <div className="d-flex justify-content-end mt-5">
         <button className="btn btn-success" onClick={() => navigate("/add-items")}>Add New Item</button>

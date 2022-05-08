@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -28,6 +28,10 @@ const customStyles = {
 const LogIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -68,10 +72,8 @@ const LogIn = () => {
       })
       .then(({ data }) => {
         localStorage.setItem("accessToken", data.accessToken);
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       });
-
-    
 
     // reset input field
     reset();
@@ -137,7 +139,7 @@ const LogIn = () => {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container my-5">
       <div>
         <Toaster />
       </div>

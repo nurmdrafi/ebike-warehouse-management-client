@@ -82,7 +82,7 @@ const Register = () => {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container my-5">
       <div>
         <Toaster />
       </div>

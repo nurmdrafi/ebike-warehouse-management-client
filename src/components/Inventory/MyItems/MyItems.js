@@ -114,7 +114,7 @@ const MyItems = () => {
         return <Loading/>
       }
 
-  return <div className="container">
+  return <div className="container" style={{minHeight: "80vh"}}>
   <Toaster/>
   <table {...getTableProps()} className="container my-4">
     <thead>
