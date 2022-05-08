@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -30,8 +30,7 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  let location = useLocation();
-  let from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -72,7 +71,7 @@ const LogIn = () => {
       })
       .then(({ data }) => {
         localStorage.setItem("accessToken", data.accessToken);
-        navigate(from, { replace: true });
+        navigate("/home");
       });
 
     // reset input field

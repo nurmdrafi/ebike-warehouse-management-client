@@ -19,9 +19,14 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             <CustomLink to="/">Home</CustomLink>
-            <CustomLink to="/manage-inventory">Manage Items</CustomLink>
-            <CustomLink to="/add-items">Add Item</CustomLink>
-            <CustomLink to="/my-items">My Items</CustomLink>
+            {user && (
+              <div className="d-flex">
+                <CustomLink to="/manage-inventory">Manage Items</CustomLink>
+                <CustomLink to="/add-items">Add Item</CustomLink>
+                <CustomLink to="/my-items">My Items</CustomLink>
+              </div>
+            )}
+
             <CustomLink to="/blogs">Blogs</CustomLink>
             {user ? (
               <button

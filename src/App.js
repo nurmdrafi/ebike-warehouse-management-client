@@ -12,21 +12,22 @@ import MyItems from './components/Inventory/MyItems/MyItems';
 import LogIn from './components/Auth/LogIn/LogIn';
 import Register from './components/Auth/Register/Register';
 import AddItems from './components/Inventory/AddItems/AddItems';
+import RequireAuth from './components/Auth/RequireAuth/RequireAuth';
 function App() {
   return (
     <div>
       <Header></Header>
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/home" element={<Home></Home>}></Route>
-        <Route path="/inventory/:_id" element={<Inventory></Inventory>}></Route>
-        <Route path="/manage-inventory" element={<ManageInventories></ManageInventories>}></Route>
-        <Route path="/add-items" element={<AddItems></AddItems>}></Route>
-        <Route path="/my-items" element={<MyItems></MyItems>}></Route>
-        <Route path="/blogs" element={<Blogs></Blogs>}></Route>
-        <Route path="/login" element={<LogIn></LogIn>}></Route>
-        <Route path="/register" element={<Register></Register>}></Route>
-        <Route path="*" element={<NotFound></NotFound>}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/home" element={<Home />}></Route>
+        <Route path="/inventory/:_id" element={<RequireAuth><Inventory /></RequireAuth>}></Route>
+        <Route path="/manage-inventory" element={<RequireAuth><ManageInventories /></RequireAuth>}></Route>
+        <Route path="/add-items" element={<RequireAuth><AddItems /></RequireAuth>}></Route>
+        <Route path="/my-items" element={<RequireAuth><MyItems /></RequireAuth>}></Route>
+        <Route path="/blogs" element={<Blogs />}></Route>
+        <Route path="/login" element={<LogIn />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer></Footer>
     </div>
