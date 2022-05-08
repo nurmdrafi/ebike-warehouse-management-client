@@ -27,7 +27,7 @@ const customStyles = {
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
-
+  const [password, setPassword] = useState("");
   const {
     register,
     handleSubmit,
@@ -58,12 +58,13 @@ const LogIn = () => {
       });
     }
 
+    
     // Sign in with email and password
     signInWithEmailAndPassword(data.email, data.password);
     // create jwt token
     axios
       .post("http://localhost:5000/login", {
-        email,
+        email: data.email
       })
       .then(({ data }) => {
         localStorage.setItem("accessToken", data.accessToken);

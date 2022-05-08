@@ -24,7 +24,7 @@ const Home = () => {
   const [width, setWidth] = useState(0);
   const carousel = useRef();
   useEffect(() => {
-    console.log(carousel.current.scrollWidth, carousel.current.offsetWidth);
+    // console.log(carousel.current.scrollWidth, carousel.current.offsetWidth);
     setWidth(3940 - 1296);
   }, []);
 
