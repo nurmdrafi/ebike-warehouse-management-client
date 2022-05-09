@@ -82,6 +82,12 @@ const Register = () => {
     }
   }, [user, from, navigate, token]);
 
+  useEffect(()=> {
+    if(userGoogle){
+      navigate(from, { replace: true });
+    }
+  }, [from, navigate, userGoogle])
+
   // Toast Notification
   useEffect(() => {
     if (user || userGoogle) {
