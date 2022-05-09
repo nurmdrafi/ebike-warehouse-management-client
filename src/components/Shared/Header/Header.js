@@ -28,6 +28,7 @@ const Header = () => {
             )}
 
             <CustomLink to="/blogs">Blogs</CustomLink>
+            <CustomLink to="/contact">Contact</CustomLink>
             {user ? (
               <button
                 className="btn btn-outline-danger"
