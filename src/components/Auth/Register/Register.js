@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
 import {
@@ -9,15 +9,17 @@ import auth from "../../../firebase.init";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../../Shared/Loading/Loading";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
+  const [token, setToken] = useState("");
   const navigate = useNavigate();
   let location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
   // Create user with email and password
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   // Sign in with google
   const [signInWithGoogle, userGoogle, loadingGoogle, errorGoogle] =
     useSignInWithGoogle(auth);
@@ -58,17 +60,27 @@ const Register = () => {
       });
     }
     // Create user with email and password
-    createUserWithEmailAndPassword(data.email, data.password);
-    // reset input field
-    reset();
+    createUserWithEmailAndPassword(data.email, data.password).then(() => {
+      // JWT
+      axios
+        .post("https://ebike-warehouse.herokuapp.com/login", {
+          email: data.email,
+        })
+        .then(({ data }) => {
+          localStorage.setItem("accessToken", data.accessToken);
+          setToken(data.accessToken);
+        });
+      // reset input field
+      reset();
+    });
   };
 
-   // Navigate
-   useEffect(() => {
-    if(user){
+  // Navigate
+  useEffect(() => {
+    if (user && token) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate]);
+  }, [user, from, navigate, token]);
 
   // Toast Notification
   useEffect(() => {
@@ -94,7 +106,10 @@ const Register = () => {
   }
 
   return (
-    <div className="form-container my-5" style={{minHeight: "calc(100vh - 185px)"}}>
+    <div
+      className="form-container my-5"
+      style={{ minHeight: "calc(100vh - 185px)" }}
+    >
       <div>
         <Toaster />
       </div>

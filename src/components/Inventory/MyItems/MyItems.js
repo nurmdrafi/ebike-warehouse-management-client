@@ -5,7 +5,6 @@ import axios from "axios";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../Shared/Loading/Loading";
-import axiosPrivate from '../../../api/axiosPrivate';
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router";
 
@@ -15,33 +14,42 @@ const MyItems = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-
-  const getItemsByEmail = async () => {
-      const email = user?.email;
-      if(email){
-        // const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`;
-        const url = `https://ebike-warehouse.herokuapp.com/inventory?userEmail=${email}`
-        try{
-          const {data} = await axiosPrivate.get(url);
-          setIsLoading(!isLoading);
-          setData(data);
-        }
-        catch(error){
-          console.log(error.message);
-                if(error.response.status === 401 || error.response.status === 403){
-                    signOut(auth);
-                    navigate('/login')
-        }
-      }
-    }
-  };
+  const email = user?.email;
 
   useEffect(() => {
-    getItemsByEmail();
-  }, [isRefresh]);
+    // http://localhost:5000/
+    // https://ebike-warehouse.herokuapp.com/myitems?userEmail=${email}
+		if (email) {
+      // console.log("client login", email)
+			axios
+				.get(
+					`https://ebike-warehouse.herokuapp.com/myitems?userEmail=${email}`,
+					{
+						headers: {
+							authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+						},
+					}
+				)
+				.then((res) => {
+					setData(res.data);
+					setIsLoading(false);
+				})	
+				.catch((err) => {
+					console.log("myitems", err.message);
+					toast.error(err.message, { theme: "dark", toastId: "accessToken-error" });
+					localStorage.removeItem("accessToken");
+					signOut(auth);
+					navigate("/login");
+				});
+		} else {
+			console.log("Try Again");
+		}
+	}, [isRefresh]);
+
 
   const handleDelete = async (id) => {
     const _id = id.value;
+    // https://ebike-warehouse.herokuapp.com/inventory/${_id}
     const proceed = window.confirm("Are you sure want to delete?");
     if (proceed) {
       const url = `https://ebike-warehouse.herokuapp.com/inventory/${_id}`;
@@ -116,7 +124,7 @@ const MyItems = () => {
         return <Loading/>
       }
 
-  return <div className="container" style={{minHeight: "calc(100vh - 185px)"}}>
+  return <div className="container" style={{minHeight: "calc(100vh - 185px)"}} >
   <Toaster/>
   {isLoading ? <Loading/> : 
   <table {...getTableProps()} className="container my-4">

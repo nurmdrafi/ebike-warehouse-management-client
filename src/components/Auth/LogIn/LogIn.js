@@ -66,7 +66,10 @@ const LogIn = () => {
     
     // Sign in with email and password
     signInWithEmailAndPassword(data.email, data.password).then(() =>{
+      console.log(data.email)
       // JWT
+      // http://localhost:5000/
+      // https://ebike-warehouse.herokuapp.com/login
       axios
         .post("https://ebike-warehouse.herokuapp.com/login", {
           email: data.email
@@ -78,7 +81,7 @@ const LogIn = () => {
         // reset input field
         reset();
     })
-
+    // console.log("token", token)
 
   };
 
