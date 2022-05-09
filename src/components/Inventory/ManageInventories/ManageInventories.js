@@ -95,7 +95,7 @@ const ManageInventories = () => {
     tableInstance;
 
   return (
-    <div className="container" style={{minHeight: "calc(100vh - 185px)"}}>
+    <div className="container" style={{minHeight: isLoading? "100vh" : "calc(100vh - 185px)"}}>
       <Toaster/>
       
       <div className="d-flex justify-content-end mt-5">

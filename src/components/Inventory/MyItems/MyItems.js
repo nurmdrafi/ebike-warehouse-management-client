@@ -124,7 +124,7 @@ const MyItems = () => {
         return <Loading/>
       }
 
-  return <div className="container" style={{minHeight: "calc(100vh - 185px)"}} >
+  return <div className="container" style={{minHeight: isLoading? "100vh": "calc(100vh - 140px)"}} >
   <Toaster/>
   {isLoading ? <Loading/> : 
   <table {...getTableProps()} className="container my-4">

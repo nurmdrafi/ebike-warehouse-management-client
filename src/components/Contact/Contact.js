@@ -16,7 +16,7 @@ const Contact = () => {
   return (
     <div
       className="container form-container my-4"
-      style={{ mixHeight: "calc(100vh - 185px)" }}
+      style={{ minHeight: "calc(100vh - 150px)" }}
     >
         <Toaster/>
         <h1 className="text-center mb-3">Get In Touch</h1>
