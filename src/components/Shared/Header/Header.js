@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import { signOut } from "firebase/auth";
+import logo from "../../../../src/images/electric-bike-logo.png";
 
 const Header = () => {
   let navigate = useNavigate();
@@ -13,7 +14,9 @@ const Header = () => {
     <Navbar bg="light" expand="lg">
       <Container style={{ minHeight: "50px" }}>
         <Navbar.Brand onClick={() => navigate("/home")} role="button">
-          Ebike Warehouse
+          <div>
+            <img src={logo} alt="ebike warehouse" style={{ width: "80px" }} />
+          </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

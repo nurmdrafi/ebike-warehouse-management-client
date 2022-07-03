@@ -5,7 +5,6 @@ import Home from "./components/Home/Home/Home";
 import NotFound from "./components/NotFound/NotFound";
 import Inventory from "./components/Inventory/Inventory/Inventory";
 import Header from "./components/Shared/Header/Header";
-import Footer from "./components/Shared/Footer/Footer";
 import ManageInventories from "./components/Inventory/ManageInventories/ManageInventories";
 import MyItems from "./components/Inventory/MyItems/MyItems";
 import LogIn from "./components/Auth/LogIn/LogIn";
