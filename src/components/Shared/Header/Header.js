@@ -26,8 +26,6 @@ const Header = () => {
                 <CustomLink to="/my-items">My Items</CustomLink>
               </span>
             )}
-
-            <CustomLink to="/blogs">Blogs</CustomLink>
             <CustomLink to="/contact">Contact</CustomLink>
             {user ? (
               <button

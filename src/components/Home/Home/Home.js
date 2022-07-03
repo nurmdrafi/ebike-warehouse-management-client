@@ -10,6 +10,7 @@ import "leaflet/dist/leaflet.css";
 import icon from 'leaflet/dist/images/marker-icon.png';
 import L from 'leaflet';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import Footer from "../../Shared/Footer/Footer";
 
 let DefaultIcon = L.icon({
     iconUrl: icon,
@@ -109,6 +110,7 @@ const Home = () => {
           </Marker>
         </MapContainer>
       </section>
+      <Footer/>
     </div>
   );
 };
